@@ -1,5 +1,5 @@
 # Predict Gold Price
-Predict gold price with LSTM
+Simple gold price prediction with LSTM. We predict gold price up and down everyday at [https://kittinan.github.io/predict-gold-price](https://kittinan.github.io/predict-gold-price/)
 
 ### Install Requirement
 
