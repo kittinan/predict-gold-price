@@ -48,15 +48,25 @@
       <div class="row">
         <div class="card">
           <div class="card-content">
-            <h3>ทำนายราคาทองคำวันพรุ่งนี้ (2017-11-05)</h3>
+            <h3>ทำนายราคาทองคำวันพรุ่งนี้ ({{tomorrow}})</h3>
             <div class="divider"></div>
             <br><br>
-            
+            {% if status == "up" %}
+            <div class="green-text">
+              <i class="material-icons trend-icon">trending_up</i>
+              <div><b>ราคามีแนวโน้มที่จะขึ้น</b></div>
+            </div>
+            {% elif status == "flat" %}
             <div class="red-text">
               <i class="material-icons trend-icon">trending_flat</i>
               <div><b>ราคามีแนวโน้มที่จะเท่าเดิม</b></div>
             </div>
-            
+            {% elif status == "down" %}
+            <div class="red-text">
+              <i class="material-icons trend-icon">trending_down</i>
+              <div><b>ราคามีแนวโน้มที่จะลง</b></div>
+            </div>
+            {% endif %}
           </div>
 
         </div>
@@ -76,89 +86,27 @@
                 </tr>
               </thead>
               <tbody>
-                
+                {% for predict in predicts %}
                 <tr>
-                  <td>2017-11-05</td>
+                  <td>{{predict.date}}</td>
                   <td>
-                    
-                    <i class="material-icons trend-icon red-text mini">trending_flat</i>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>2017-11-04</td>
-                  <td>
-                    
-                    <i class="material-icons trend-icon red-text mini">trending_down</i>
-                    
-                  </td>
-                  <td>
-                    
-                    <i class="material-icons trend-icon green-text mini">thumb_up</i>
-                    
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>2017-11-03</td>
-                  <td>
-                    
-                    <i class="material-icons trend-icon red-text mini">trending_flat</i>
-                    
-                  </td>
-                  <td>
-                    
-                    <i class="material-icons trend-icon green-text mini">thumb_up</i>
-                    
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>2017-11-02</td>
-                  <td>
-                    
+                    {% if predict.trend == "up" %}
                     <i class="material-icons trend-icon green-text mini">trending_up</i>
-                    
-                  </td>
-                  <td>
-                    
-                    <i class="material-icons trend-icon red-text mini">thumb_down</i>
-                    
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>2017-11-01</td>
-                  <td>
-                    
+                    {% elif predict.trend == "flat" %}
+                    <i class="material-icons trend-icon red-text mini">trending_flat</i>
+                    {% else %}
                     <i class="material-icons trend-icon red-text mini">trending_down</i>
-                    
+                    {% endif %}
                   </td>
                   <td>
-                    
-                    <i class="material-icons trend-icon red-text mini">thumb_down</i>
-                    
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>2017-10-31</td>
-                  <td>
-                    
-                    <i class="material-icons trend-icon green-text mini">trending_up</i>
-                    
-                  </td>
-                  <td>
-                    
+                    {% if predict.is_correct >= 1 %}
                     <i class="material-icons trend-icon green-text mini">thumb_up</i>
-                    
+                    {% elif predict.is_correct == 0 %}
+                    <i class="material-icons trend-icon red-text mini">thumb_down</i>
+                    {% endif %}
                   </td>
                 </tr>
-                
+                {% endfor %}
               </tbody>
             </table>
           </div>
