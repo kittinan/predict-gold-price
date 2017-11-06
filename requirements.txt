@@ -4,3 +4,4 @@ pandas
 matplotlib
 numpy
 keras-tqdm
+h5py
