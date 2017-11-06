@@ -111,7 +111,10 @@ df_predict = pd.read_csv("predicted.csv")
 
 # Check Predict
 check_date = pd.DatetimeIndex(df_predict.iloc[-1:]["date"].values).strftime('%Y-%m-%d')[0]
-days = df.iloc[df.index.get_loc(check_date)-1: df.index.get_loc(check_date)+1]
+try:
+    days = df.iloc[df.index.get_loc(check_date)-1: df.index.get_loc(check_date)+1]
+except:
+    days = df.iloc[-2:]
 today_price = days.iloc[1]["price"]
 yesterday_price = days.iloc[0]["price"]
 real_sign = "flat"
